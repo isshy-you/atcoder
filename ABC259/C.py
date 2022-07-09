@@ -34,20 +34,23 @@ if S[0]==T[0] and S[1]==T[1]: #最初は同じなら
     sp = 2
     for tp,ss in enumerate(T[:-1]):
         if tp>=2:
-            if S[sp-1]==S[sp-2]:
+            if S[sp-1]==S[sp-2]:#同じ文字が続いたら
                 flag = 1
-                if DEBUG==1:print('flagON',sp,tp,ss)
+                if DEBUG==1:print('flagON',sp,tp,S[sp],T[tp])
             else:
                 flag = 0
-                if DEBUG==1:print('flagOFF',sp,tp,ss)
-            if S[sp]!=T[tp]:
+                if DEBUG==1:print('flagOFF',sp,tp,S[sp],T[tp])
+            if S[sp]!=T[tp]: #不一致なら
                 if DEBUG==1:print(S[sp],T[tp])
-                if flag!=1:
+                if sp==len(S)-2 and S[sp]!=T[tp+1]: #Sが最後の文字だったらNo
+                    if DEBUG==1:print('last sp is differ')
+                    print('No')
+                    sys.exit()
+                if flag!=1: #同じ文字が続いてなかったらNo
                     if DEBUG==1:print('flag',flag)
                     print('No')
                     sys.exit()
-                if sp==len(S)-2 and S[sp]!=T[tp+1]:
-                    if DEBUG==1:print('last sp is differ')
+                if (sp>tp): #ポインタが逆転したら（効果なし？）
                     print('No')
                     sys.exit()
             else: #文字が同じなら次の文字へ
