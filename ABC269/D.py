@@ -15,10 +15,10 @@ N=int(input())
 # if DEBUG : print('input=',N)
 
 
-maxx = -99999
-maxy = -99999
-minx = 99999
-miny = 99999
+maxx = -1000
+maxy = -1000
+minx = 1000
+miny = 1000
 x=[]
 y=[]
 for ii in range(N):
@@ -52,8 +52,10 @@ dat = [[0]*(sizex+1) for i in range(sizey+1)]
 
 for ii in range(N): # ii : line(y)
     # if DEBUG : print('x,y=',x[ii]-minx,y[ii]-miny)
-    dat[y[ii]-miny][x[ii]-minx] = -1
-    if DEBUG : print('dat=',x[ii]-minx,y[ii]-miny,dat[y[ii]-miny][x[ii]-minx])
+    xx = x[ii]-minx
+    yy = y[ii]-miny
+    dat[yy][xx] = -1
+    if DEBUG : print('dat=',xx,yy,dat[yy][xx])
 
 if DEBUG : 
     for ii in range(sizey):
@@ -73,11 +75,11 @@ for jj in range(sizey):
                 dat[jj+1][ii+1] =num # checked
             num += 1
         elif dat[jj][ii]!=0:
-            if  dat[jj+1][ii  ]!=dat[jj][ii] and dat[jj+1][ii  ]==-1:
+            if  dat[jj+1][ii  ]==-1:
                 dat[jj+1][ii  ] =dat[jj][ii] # checked
-            if  dat[jj  ][ii+1]!=dat[jj][ii] and dat[jj  ][ii+1]==-1:
+            if  dat[jj  ][ii+1]==-1:
                 dat[jj  ][ii+1] =dat[jj][ii] # checked
-            if  dat[jj+1][ii+1]!=dat[jj][ii] and dat[jj+1][ii+1]==-1:
+            if  dat[jj+1][ii+1]==-1:
                 dat[jj+1][ii+1] =dat[jj][ii] # checked
         if DEBUG : 
             for ii in range(sizey):
