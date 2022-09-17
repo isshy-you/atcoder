@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# AC x13
-# WA x54
+# AC x22
+# WA x45
 
 from site import abs_paths
 import sys
@@ -48,43 +48,47 @@ if DEBUG : print('miny,sizey=',miny,sizey)
 
 # dat=[[0]*size]*size
 dat = [[0]*(sizex+1) for i in range(sizey+1)]
-if DEBUG : print(dat)
+# if DEBUG : print(dat)
 
 for ii in range(N): # ii : line(y)
-    if DEBUG : print('x,y=',x[ii]-minx,y[ii]-miny)
-    dat[y[ii]-miny][x[ii]-minx] = 1
+    # if DEBUG : print('x,y=',x[ii]-minx,y[ii]-miny)
+    dat[y[ii]-miny][x[ii]-minx] = -1
     if DEBUG : print('dat=',x[ii]-minx,y[ii]-miny,dat[y[ii]-miny][x[ii]-minx])
 
 if DEBUG : 
     for ii in range(sizey):
-        print('dat=',dat[sizey-ii])
+        print('dat=',ii,dat[ii])
 if DEBUG : print('')
 ans = 0
-num = 10
+num = 1
 for jj in range(sizey):
     for ii in range(sizex):
-        if dat[jj][ii]==1:
+        if dat[jj][ii]==-1:
             dat[jj][ii]=num # checked
-            if dat[jj+1][ii]==1:
-                dat[jj+1][ii]=num # checked
-            if dat[jj][ii+1]==1:
-                dat[jj][ii+1]=num # checked
-            if dat[jj+1][ii+1]==1:
-                dat[jj+1][ii+1]=num # checked
-            num += 10
+            if  dat[jj+1][ii  ]==-1:
+                dat[jj+1][ii  ] =num # checked
+            if  dat[jj  ][ii+1]==-1:
+                dat[jj  ][ii+1] =num # checked
+            if  dat[jj+1][ii+1]==-1:
+                dat[jj+1][ii+1] =num # checked
+            num += 1
         elif dat[jj][ii]!=0:
-            if dat[jj+1][ii]!=dat[jj][ii]:
-                dat[jj+1][ii]=dat[jj][ii] # checked
-            if dat[jj][ii+1]!=dat[jj][ii]:
-                dat[jj][ii+1]=dat[jj][ii] # checked
-            if dat[jj+1][ii+1]!=dat[jj][ii]:
-                dat[jj+1][ii+1]=dat[jj][ii] # checked
+            if  dat[jj+1][ii  ]!=dat[jj][ii] and dat[jj+1][ii  ]==-1:
+                dat[jj+1][ii  ] =dat[jj][ii] # checked
+            if  dat[jj  ][ii+1]!=dat[jj][ii] and dat[jj  ][ii+1]==-1:
+                dat[jj  ][ii+1] =dat[jj][ii] # checked
+            if  dat[jj+1][ii+1]!=dat[jj][ii] and dat[jj+1][ii+1]==-1:
+                dat[jj+1][ii+1] =dat[jj][ii] # checked
+        if DEBUG : 
+            for ii in range(sizey):
+                print('dat=',ii,dat[ii])
+            print('')
 
 if DEBUG : 
     for ii in range(sizey):
-        print('dat=',dat[3-ii])
+        print('dat=',ii,dat[ii])
 
-print(int(num/10-1))
+print(num-1)
 
 
 
