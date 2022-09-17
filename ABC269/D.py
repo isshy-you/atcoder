@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# AC x22
-# WA x45
+# AC x24
+# WA x43
 
 from site import abs_paths
 import sys
@@ -26,7 +26,7 @@ for ii in range(N):
     X = int(S[0])
     Y = int(S[1])
     # if DEBUG : print('X,Y=',X,Y)
-    if Y>=1 : X=X-1
+    # if Y>=1 : X=X-1
     if maxx < X :
         maxx = X
     if maxy < Y :
@@ -89,9 +89,3 @@ if DEBUG :
         print('dat=',ii,dat[ii])
 
 print(num-1)
-
-
-
-
-
-
