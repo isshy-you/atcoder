@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# AC x24
-# WA x43
+# AC x32
+# WA x35
 
-from site import abs_paths
 import sys
 import math
 
@@ -10,6 +9,12 @@ import math
 
 DEBUG=False
 # DEBUG=True
+
+def rep(a,b):
+    for ii in range(sizey):
+        for jj in range(sizex):
+            if dat[jj][ii]==b:
+                dat[jj][ii]=a
 
 N=int(input())
 # if DEBUG : print('input=',N)
@@ -63,6 +68,7 @@ if DEBUG :
 if DEBUG : print('')
 ans = 0
 num = 1
+minus = 0
 for jj in range(sizey):
     for ii in range(sizex):
         if dat[jj][ii]==-1:
@@ -77,17 +83,32 @@ for jj in range(sizey):
         elif dat[jj][ii]!=0:
             if  dat[jj+1][ii  ]==-1:
                 dat[jj+1][ii  ] =dat[jj][ii] # checked
+            elif dat[jj+1][ii  ]!=0 and dat[jj][ii]!=dat[jj+1][ii  ]:
+                if DEBUG : print('minus y+1',ii,jj,dat[jj+1][ii  ])
+                rep(dat[jj][ii],dat[jj+1][ii  ])
+                minus += 1           
             if  dat[jj  ][ii+1]==-1:
                 dat[jj  ][ii+1] =dat[jj][ii] # checked
+            elif dat[jj  ][ii+1]!=0 and dat[jj][ii]!=dat[jj  ][ii+1]:
+                if DEBUG : print('minus x+1',ii,jj,dat[jj  ][ii+1])
+                rep(dat[jj][ii],dat[jj  ][ii+1])
+                minus += 1           
             if  dat[jj+1][ii+1]==-1:
                 dat[jj+1][ii+1] =dat[jj][ii] # checked
+            elif dat[jj+1][ii+1]!=0 and dat[jj][ii]!=dat[jj+1][ii+1]:
+                if DEBUG : print('minus x+1,y+1',ii,jj,dat[jj+1][ii+1])
+                rep(dat[jj][ii],dat[jj+1][ii+1])
+                minus += 1           
         if DEBUG : 
             for ii in range(sizey):
                 print('dat=',ii,dat[ii])
+        if DEBUG :
+            print('num,minus=',num,minus)
+        if DEBUG :
             print('')
 
 if DEBUG : 
     for ii in range(sizey):
         print('dat=',ii,dat[ii])
 
-print(num-1)
+print(num-1-minus)
