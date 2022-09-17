@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# AC x32
-# WA x35
+# AC x67
 
 import sys
 import math
@@ -75,10 +74,22 @@ for jj in range(sizey):
             dat[jj][ii]=num # checked
             if  dat[jj+1][ii  ]==-1:
                 dat[jj+1][ii  ] =num # checked
+            elif dat[jj+1][ii  ]!=0 and dat[jj][ii]!=dat[jj+1][ii  ]:
+                if DEBUG : print('minus y+1',ii,jj,dat[jj+1][ii  ])
+                rep(dat[jj][ii],dat[jj+1][ii  ])
+                minus += 1           
             if  dat[jj  ][ii+1]==-1:
                 dat[jj  ][ii+1] =num # checked
+            elif dat[jj  ][ii+1]!=0 and dat[jj][ii]!=dat[jj  ][ii+1]:
+                if DEBUG : print('minus x+1',ii,jj,dat[jj  ][ii+1])
+                rep(dat[jj][ii],dat[jj  ][ii+1])
+                minus += 1           
             if  dat[jj+1][ii+1]==-1:
                 dat[jj+1][ii+1] =num # checked
+            elif dat[jj+1][ii+1]!=0 and dat[jj][ii]!=dat[jj+1][ii+1]:
+                if DEBUG : print('minus x+1,y+1',ii,jj,dat[jj+1][ii+1])
+                rep(dat[jj][ii],dat[jj+1][ii+1])
+                minus += 1           
             num += 1
         elif dat[jj][ii]!=0:
             if  dat[jj+1][ii  ]==-1:
@@ -112,3 +123,20 @@ if DEBUG :
         print('dat=',ii,dat[ii])
 
 print(num-1-minus)
+
+'''
+7
+1 4
+2 3
+2 4
+3 2
+3 3
+4 1
+4 2
+
+0 0 0 1
+0 0 1 1
+0 1 1 0
+1 1 0 0
+'''
+
