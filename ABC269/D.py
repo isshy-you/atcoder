@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# AC x7
-# WA x57
-# RE x3
+# AC x13
+# WA x54
 
 from site import abs_paths
 import sys
@@ -16,8 +15,10 @@ N=int(input())
 # if DEBUG : print('input=',N)
 
 
-max = 0
-min = 99999
+maxx = -99999
+maxy = -99999
+minx = 99999
+miny = 99999
 x=[]
 y=[]
 for ii in range(N):
@@ -26,37 +27,42 @@ for ii in range(N):
     Y = int(S[1])
     # if DEBUG : print('X,Y=',X,Y)
     if Y>=1 : X=X-1
-    if max < X+1 :
-        max = X+1
-    if max < Y+1 :
-        max = Y+1
-    if min > X+1:
-        min = X+1
-    if min > Y+1:
-        min = Y+1
+    if maxx < X :
+        maxx = X
+    if maxy < Y :
+        maxy = Y
+    if minx > X:
+        minx = X
+    if miny > Y:
+        miny = Y
     x.append(X)
     y.append(Y)
 
 if DEBUG : print(x)
 if DEBUG : print(y)
 
-size = max - min + 1
-
+sizex = maxx - minx + 1
+sizey = maxy - miny + 1
+if DEBUG : print('minx,sizex=',minx,sizex)
+if DEBUG : print('miny,sizey=',miny,sizey)
 
 # dat=[[0]*size]*size
-dat = [[0]*size for i in range(size)]
-
-if DEBUG : print(dat)
-for ii in range(N):
-    dat[y[ii]+1][x[ii]+1] = 1
-    if DEBUG : print('dat=',x[ii]+1,y[ii]+1,dat[y[ii]+1][x[ii]+1])
-
+dat = [[0]*(sizex+1) for i in range(sizey+1)]
 if DEBUG : print(dat)
 
+for ii in range(N): # ii : line(y)
+    if DEBUG : print('x,y=',x[ii]-minx,y[ii]-miny)
+    dat[y[ii]-miny][x[ii]-minx] = 1
+    if DEBUG : print('dat=',x[ii]-minx,y[ii]-miny,dat[y[ii]-miny][x[ii]-minx])
+
+if DEBUG : 
+    for ii in range(sizey):
+        print('dat=',dat[sizey-ii])
+if DEBUG : print('')
 ans = 0
 num = 10
-for ii in range(max):
-    for jj in range(max):
+for jj in range(sizey):
+    for ii in range(sizex):
         if dat[jj][ii]==1:
             dat[jj][ii]=num # checked
             if dat[jj+1][ii]==1:
@@ -75,7 +81,7 @@ for ii in range(max):
                 dat[jj+1][ii+1]=dat[jj][ii] # checked
 
 if DEBUG : 
-    for ii in range(4):
+    for ii in range(sizey):
         print('dat=',dat[3-ii])
 
 print(int(num/10-1))
