@@ -8,7 +8,7 @@ import math
 sys.setrecursionlimit(1000000)
 
 DEBUG=False
-DEBUG=True
+# DEBUG=True
 
 # リスト型標準入力
 def input_list():
@@ -24,45 +24,39 @@ def input_list_2d(x,y):
         dat.append(values)
     return(dat)
 
-def connect(node,last,goal): # last -> node -> goal
+def connect(node,goal): # last -> node -> goal
     for ii in range(N-1):
-        if flag[ii]==False:
+        if flag[ii]==False: # 使ったノードは使わない
             if dat[ii][0]==node:
                 next = dat[ii][1]
                 if DEBUG: print('node,next=',node,next)
-                if last != next: # loop check
-                    if next != goal: # not goal
-                        flag[ii]=True
-                        if DEBUG: print('*node,next=',node,next,flag)
-                        result = connect(next,node,goal)
-                        if result:
-                            if DEBUG: print('**node,next=',node,next)
-                            line.append(next)
-                            return(True)
-                    else: # goal
+                if next != goal: # not goal
+                    flag[ii]=True # 使ったノードはフラグを立てる
+                    if DEBUG: print('*node,next=',node,next,flag)
+                    result = connect(next,goal)
+                    if result:
                         if DEBUG: print('**node,next=',node,next)
                         line.append(next)
                         return(True)
-                else:
-                    if DEBUG : print('loop')
-            if dat[ii][1]==node:
+                else: # goal
+                    if DEBUG: print('**node,next=',node,next)
+                    line.append(next)
+                    return(True)
+            elif dat[ii][1]==node:
                 next = dat[ii][0]
                 if DEBUG: print('node,next=',node,next)
-                if last != next:
-                    if next != goal:
-                        flag[ii]=True
-                        if DEBUG: print('*node,next=',node,next,flag)
-                        result = connect(next,node,goal)
-                        if result:
-                            if DEBUG: print('**node,next=',node,next)
-                            line.append(next)
-                            return(True)
-                    else:
+                if next != goal:
+                    flag[ii]=True
+                    if DEBUG: print('*node,next=',node,next,flag)
+                    result = connect(next,goal)
+                    if result:
                         if DEBUG: print('**node,next=',node,next)
                         line.append(next)
                         return(True)
                 else:
-                    if DEBUG : print('loop')
+                    if DEBUG: print('**node,next=',node,next)
+                    line.append(next)
+                    return(True)
     return(False)
 
 # S = input()
@@ -73,10 +67,11 @@ dat = input_list_2d(2,N-1)
 if DEBUG : print(N,X,Y)
 if DEBUG : print(dat)
 
-flag= [False for i in range(N)]
+# flag= [False for i in range(N)]
+flag = [False] * N
 line=[]
 # line.append(X)
-next = connect(X,0,Y)
+next = connect(X,Y)
 if DEBUG: print('final=',next)
 
 if DEBUG : print(line)
@@ -88,3 +83,13 @@ for ii in range(len(line)-1,-1,-1):
     ans += str(val)+' '
 
 print(str(X)+' '+ans)
+exit()
+
+'''
+6 5 4
+3 1
+2 5
+1 2
+4 1
+2 6
+'''
