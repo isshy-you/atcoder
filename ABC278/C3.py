@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# PyPy3
-# ACx16, TLEx1
+# ACx17
 
 import sys
 import math
