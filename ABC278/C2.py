@@ -40,37 +40,25 @@ N,Q = input_list()
 dat=[]
 dat = input_list_2d(N,Q)
 
-# dprint('N',N)
-# dprint('Q',Q)
-# dprint('dat',dat) # dat[ii]=[T,A,B]
-
-# follow = [[] for i in range(N)]
 follow={}
-# for ii in range(N):
-#     follow[ii]=[]
-# dprint('follow',follow)
 for ii in range(Q):
     if dat[ii][0] == 1:
         if not dat[ii][1] in follow:
             follow[dat[ii][1]]=[dat[ii][2]]
-            # dprint('follow:add',follow)
+            dprint('follow:add',follow)
         elif not dat[ii][2] in follow[dat[ii][1]]:
             follow[dat[ii][1]].append(dat[ii][2])
-            # follow.setdefault(dat[ii][1],dat[ii][2])
-            # follow[dat[ii][1]].append(dat[ii][2])
-            # dprint('follow:add',follow)
+            dprint('follow:add',follow)
     elif dat[ii][0] == 2:
-        # idx = follow[dat[ii][1]-1].index(dat[ii][2])
         if dat[ii][1] in follow:
-            # dprint('follow[dat[ii][1]]',follow[dat[ii][1]])
-            # dprint('dat[ii][2]',dat[ii][2])
             idx = myindex(follow[dat[ii][1]],dat[ii][2])
-            # dprint('idx',idx)
+            # idx = follow[dat[ii][1]].index(dat[ii][2])
+            dprint('idx',idx)
             if idx >= 0:
-                # dprint('follow:del',follow)
+                dprint('follow:del',follow)
                 del follow[dat[ii][1]][idx]
     elif dat[ii][0] == 3:
-        # dprint('dat[ii]',dat[ii])
+        dprint('dat[ii]',dat[ii])
         # if DEBUG:
         #     if dat[ii][1] in follow:
         #         dprint('follow[dat[ii][1]]',follow[dat[ii][1]])
