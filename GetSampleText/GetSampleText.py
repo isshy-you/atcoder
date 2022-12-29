@@ -30,13 +30,13 @@ for ii,jj in enumerate(pre):
         if (select == 0 or cnt == select) :
             if flag : 
                 with open("input{}.txt".format(cnt), mode="w") as f:
-                    f.write(jj.string)
+                    f.write(jj.string.replace('\r',''))
                 if len(args) < 5:
                     print('<<< input-{} <<<'.format(cnt))
                     print(jj.string)
             else : 
                 with open("output{}.txt".format(cnt), mode="w") as f:
-                    f.write(jj.string)
+                    f.write(jj.string.replace('\r',''))
                 if len(args) < 5 :
                     print('>>> output-{} >>>'.format(cnt))
                     print(jj.string)
