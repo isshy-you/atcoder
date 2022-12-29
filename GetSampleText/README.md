@@ -15,9 +15,17 @@ pip install bs4
 
 # Usage
 
-example : ABC283 C problem
+example : ABC283 C all input/output 
 ```PowerShell
 py .\GetExample\GetExample.py 283 c
+```
+```PowerShell
+py .\GetExample\GetExample.py 283 c 0
+```
+
+example : ABC283 C only No.2
+```PowerShell
+py .\GetExample\GetExample.py 283 c 2
 ```
 
 # Note
