@@ -34,7 +34,7 @@ def input_list_2d(lines):
     return(dat)
 
 DEBUG=False
-DEBUG=True
+# DEBUG=True
 
 inp = input_list()
 N = inp[0]
