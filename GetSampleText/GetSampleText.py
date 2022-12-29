@@ -4,6 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 import sys
+import subprocess
 
 args = sys.argv
 
@@ -26,12 +27,32 @@ flag = True
 cnt = 1
 for ii,jj in enumerate(pre):
     if jj.string != None :
-        if select == 0 or cnt == select :
+        if (select == 0 or cnt == select) :
             if flag : 
-                print('<<< input-{} <<<'.format(cnt))
+                with open("input{}.txt".format(cnt), mode="w") as f:
+                    f.write(jj.string)
+                if len(args) < 5:
+                    print('<<< input-{} <<<'.format(cnt))
+                    print(jj.string)
             else : 
-                print('>>> output-{} >>>'.format(cnt))
-            print(jj.string)
+                with open("output{}.txt".format(cnt), mode="w") as f:
+                    f.write(jj.string)
+                if len(args) < 5 :
+                    print('>>> output-{} >>>'.format(cnt))
+                    print(jj.string)
+                else :
+                    print('=== output/answer-{} ==='.format(cnt))
+                    print(jj.string[:-1])
+                    # command prompt
+                    cmd = 'py ' + args[4] + ' < ' + 'input{}.txt'.format(cnt) + ' > ' + "answer{}.txt".format(cnt)
+                    # PowerShell
+                    # Get-Content input.txt | python .\hogehoge.py
+                    subprocess.run(cmd, shell=True)
+                    with open("answer{}.txt".format(cnt), mode="r") as f:
+                        print(f.read()[:-1])
         if not flag :
             cnt = cnt + 1
         flag = not flag
+
+
+    
