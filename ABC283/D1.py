@@ -40,7 +40,7 @@ digit = '0123456789'
 hex = '0123456789ABCDEF'
 
 DEBUG=False
-DEBUG=True
+# DEBUG=True
 
 inp = input()
 S = inp[:-1]
