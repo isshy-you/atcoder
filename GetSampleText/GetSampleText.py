@@ -9,17 +9,20 @@ import subprocess
 args = sys.argv
 
 if len(args) >= 3 :
-    abc = args[1]
-    problem = args[2]
-    URL = 'https://atcoder.jp/contests/abc'+str(args[1]+'/tasks/abc'+str(args[1])+'_'+args[2])
-    if len(args) >= 4 :
-        select = int(args[3])
+    contest = str(args[1])
+    num = str(args[2])
+    problem = str(args[3])
+    URL = 'https://atcoder.jp/contests/'+contest+num+'/tasks/'+contest+num+'_'+problem
+    # print(URL)
+    # URL = 'https://atcoder.jp/contests/abc282/tasks/abc282_c'
+    # URL = 'https://atcoder.jp/contests/arc153/tasks/abc153_b'
+    if len(args) >= 5 :
+        select = int(args[4])
     else:
         select = 0
 else:
-    print('\nUsage : py '+args[0]+' (abc_number) ([a|b|c|d|e|f|g])\n')
+    print('\nUsage : py '+args[0]+' [abc|arc] (number) ([a|b|c|d|e|f|g]) (sample_number) (code.py)\n')
     exit()
-# URL = 'https://atcoder.jp/contests/abc282/tasks/abc282_c'
 res = requests.get(URL)
 soup = BeautifulSoup(res.text,"html.parser")
 pre = soup.select('span.lang-ja div.part pre')
@@ -44,7 +47,7 @@ for ii,jj in enumerate(pre):
                     print('=== output/answer-{} ==='.format(cnt))
                     print(jj.string[:-1])
                     # command prompt
-                    cmd = 'py ' + args[4] + ' < ' + 'input{}.txt'.format(cnt) + ' > ' + "answer{}.txt".format(cnt)
+                    cmd = 'py ' + args[5] + ' < ' + 'input{}.txt'.format(cnt) + ' > ' + "answer{}.txt".format(cnt)
                     # PowerShell
                     # Get-Content input.txt | python .\hogehoge.py
                     subprocess.run(cmd, shell=True)
