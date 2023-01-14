@@ -21,7 +21,7 @@ if len(args) >= 3 :
     else:
         select = 0
 else:
-    print('\nUsage : py '+args[0]+' [abc|arc] (number) ([a|b|c|d|e|f|g])\n')
+    print('\nUsage : py '+args[0]+' [abc|arc] (number) ([a|b|c|d|e|f|g]) (sample_number) (code.py)\n')
     exit()
 res = requests.get(URL)
 soup = BeautifulSoup(res.text,"html.parser")
@@ -47,7 +47,7 @@ for ii,jj in enumerate(pre):
                     print('=== output/answer-{} ==='.format(cnt))
                     print(jj.string[:-1])
                     # command prompt
-                    cmd = 'py ' + args[4] + ' < ' + 'input{}.txt'.format(cnt) + ' > ' + "answer{}.txt".format(cnt)
+                    cmd = 'py ' + args[5] + ' < ' + 'input{}.txt'.format(cnt) + ' > ' + "answer{}.txt".format(cnt)
                     # PowerShell
                     # Get-Content input.txt | python .\hogehoge.py
                     subprocess.run(cmd, shell=True)
