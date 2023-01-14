@@ -16,27 +16,29 @@ pip install bs4
 
 # Usage
 
+Usage : py c:/Users/yuich/Source/AtCode/GetSampleText/GetSampleText.py [abc|arc] (number) ([a|b|c|d|e|f|g])
+
 example : ABC283 C all input/output 
 ```PowerShell
-py .\GetSxampleText\GetSxampleText.py 283 c
+py .\GetSxampleText\GetSxampleText.py abc 283 c
 ```
 ```PowerShell
-py .\GetSxampleText\GetSxampleText.py 283 c 0
+py .\GetSxampleText\GetSxampleText.py abc 283 c 0
 ```
 
 example : ABC283 C only No.2
 ```PowerShell
-py .\GetSxampleText\GetSxampleText.py 283 c 2
+py .\GetSxampleText\GetSxampleText.py abc 283 c 2
 ```
 
 example : ABC283 C all input/output & check my code
 ```PowerShell
-py .\GetSxampleText\GetSxampleText.py 283 c 0 ABC283C.py
+py .\GetSxampleText\GetSxampleText.py abc 283 c 0 ABC283C.py
 ```
 
 example : ABC283 C only No.2 & check my code
 ```PowerShell
-py .\GetSxampleText\GetSxampleText.py 283 c 2 ABC283C.py
+py .\GetSxampleText\GetSxampleText.py abc 283 c 2 ABC283C.py
 ```
 
 # Note
